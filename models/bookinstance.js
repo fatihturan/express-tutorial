@@ -1,3 +1,4 @@
+var moment = require('moment');
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
@@ -15,6 +16,13 @@ BookInstanceSchema
 .virtual("url")
 .get(function() {
 	return "/catalog/bookinstance/" + this._id;
+});
+
+// Pretty Dates
+BookInstanceSchema
+.virtual('due_back_formatted')
+.get(function () {
+  return moment(this.due_back).format('Do MMMM, YYYY');
 });
 
 // Export model
